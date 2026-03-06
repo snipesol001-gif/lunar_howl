@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunar Howl</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+/* ----------------- GLOBAL ----------------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Poppins, sans-serif;
+  background:#04040a;
+  color:white;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* ----------------- UNIVERSE BACKGROUND ----------------- */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:200%;
+  background:url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity:.25;
+  animation:starsMove 150s linear infinite;
+  z-index:-2;
+}
+
+/* Planet Layers */
+#planet1, #planet2 {
+  position:fixed;
+  border-radius:50%;
+  opacity:0.2;
+  z-index:-1;
+}
+
+#planet1{
+  width:300px; height:300px;
+  background:radial-gradient(circle, #ff7b00 0%, transparent 70%);
+  top:20%; left:10%;
+  animation: floatPlanet1 50s linear infinite alternate;
+}
+
+#planet2{
+  width:500px; height:500px;
+  background:radial-gradient(circle, #7b00ff 0%, transparent 70%);
+  top:60%; right:15%;
+  animation: floatPlanet2 80s linear infinite alternate;
+}
+
+@keyframes starsMove{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-2000px);}
+}
+
+@keyframes floatPlanet1{
+  0%{transform:translateY(0px) translateX(0px);}
+  100%{transform:translateY(50px) translateX(30px);}
+}
+
+@keyframes floatPlanet2{
+  0%{transform:translateY(0px) translateX(0px);}
+  100%{transform:translateY(-70px) translateX(-50px);}
+}
+
+/* ----------------- PRELOADER ----------------- */
+#preloader{
+  position:fixed;
+  width:100%;
+  height:100vh;
+  background:black;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  transition:opacity 1s ease;
+}
+
+#preloader img{
+  width:160px;
+  border-radius:15px;
+  box-shadow:0 0 40px #ff7b00;
+  animation:float 3s ease-in-out infinite;
+}
+
+#preloader h1{
+  font-family:Orbitron;
+  margin-top:25px;
+  font-size:42px;
+  color:#ffb347;
+  letter-spacing:5px;
+  text-shadow:0 0 20px #ff7b00;
+}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+  100%{transform:translateY(0)}
+}
+
+/* ----------------- HERO ----------------- */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  backdrop-filter:blur(10px);
+  background: rgba(255,255,255,0.03);
+  border-radius:20px;
+  margin:20px;
+}
+
+.hero img{
+  width:260px;
+  border-radius:18px;
+  box-shadow:0 0 40px rgba(255,140,0,.6);
+  animation:float 4s ease-in-out infinite;
+}
+
+.hero h1{
+  font-family:Orbitron;
+  font-size:52px;
+  margin-top:25px;
+  color:#ffb347;
+  text-shadow:0 0 25px #ff7b00;
+}
+
+.hero p{
+  margin-top:10px;
+  opacity:.85;
+}
+
+.btn{
+  margin-top:25px;
+  padding:14px 32px;
+  background:#ff7b00;
+  border:none;
+  border-radius:30px;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 20px #ff7b00;
+}
+
+/* ----------------- SECTIONS ----------------- */
+section{
+  padding:100px 12%;
+  backdrop-filter:blur(10px);
+  background: rgba(255,255,255,0.03);
+  border-radius:20px;
+  margin:40px 0;
+}
+
+section h2{
+  font-family:Orbitron;
+  font-size:36px;
+  margin-bottom:40px;
+  text-align:center;
+  color:#ffb347;
+  text-shadow:0 0 15px #ff7b00;
+}
+
+/* ----------------- ABOUT ----------------- */
+.about p{
+  max-width:800px;
+  margin:auto;
+  line-height:1.7;
+  text-align:center;
+}
+
+/* ----------------- ECOSYSTEM ----------------- */
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+}
+
+.feature{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(15px);
+  padding:25px;
+  border-radius:15px;
+  transition:.3s;
+}
+
+.feature:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 20px rgba(255,140,0,.5);
+}
+
+/* ----------------- ROADMAP ----------------- */
+.roadmap img{
+  width:100%;
+  max-width:1100px;
+  display:block;
+  margin:auto;
+  border-radius:15px;
+  box-shadow:0 0 40px rgba(255,140,0,.5);
+}
+
+/* ----------------- NFT COLLECTION ----------------- */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:25px;
+}
+
+.gallery img{
+  width:100%;
+  border-radius:12px;
+  transition:.3s;
+  box-shadow:0 0 15px rgba(0,0,0,.6);
+}
+
+.gallery img:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 25px #ff7b00;
+}
+
+/* ----------------- WHITEPAPER ----------------- */
+.whitepaper{
+  max-width:900px;
+  margin:auto;
+  line-height:1.8;
+}
+
+.whitepaper h3{
+  margin-top:40px;
+  font-family:Orbitron;
+  color:#ffb347;
+}
+
+.whitepaper ul{
+  margin-left:20px;
+  margin-top:10px;
+}
+
+.whitepaper li{
+  margin-bottom:6px;
+}
+
+/* ----------------- FOOTER ----------------- */
+footer{
+  padding:50px;
+  text-align:center;
+  background:#08080f;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.socials{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:25px;
+}
+
+.socials img{
+  width:40px;
+  filter:drop-shadow(0 0 8px #ff7b00);
+  transition:.3s;
+}
+
+.socials img:hover{
+  transform:scale(1.2);
+  filter:drop-shadow(0 0 18px #ff7b00);
+}
+
+/* ----------------- SCROLL ANIMATION ----------------- */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 1s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<!-- UNIVERSE PLANETS -->
+<div id="planet1"></div>
+<div id="planet2"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <img src="images/hero_nft.png">
+  <h1>LUNAR HOWL</h1>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="images/hero_nft.png">
+  <h1>LUNAR HOWL</h1>
+  <p>From Mortals to Immortals — the rise of divine creation</p>
+  <a href="https://discord.gg/72gAHHpPY8">
+    <button class="btn">Join The Pack</button>
+  </a>
+</section>
+
+<!-- ABOUT -->
+<section class="about reveal">
+  <h2>About</h2>
+  <p>
+    Lunar Howl is a divine NFT ecosystem built on Solana where holders become part of
+    a celestial order. Each NFT represents immortal power within an expanding
+    infrastructure of staking, gaming, launchpads and decentralized governance.
+  </p>
+</section>
+
+<!-- ECOSYSTEM -->
+<section class="reveal">
+  <h2>Ecosystem</h2>
+  <div class="features">
+    <div class="feature"><h3>Lunar Vault</h3><p>Stake your Lunar NFT to earn SOL rewards.</p></div>
+    <div class="feature"><h3>Lunar Gate</h3><p>Exclusive launchpad access for holders.</p></div>
+    <div class="feature"><h3>$HOWL Token</h3><p>The sacred energy token powering the ecosystem.</p></div>
+    <div class="feature"><h3>Lunar Realms</h3><p>3D NFT gaming universe with on-chain rewards.</p></div>
+    <div class="feature"><h3>Temple of the Moon</h3><p>Holder-only gaming platform with jackpots.</p></div>
+    <div class="feature"><h3>Eternal Blessings</h3><p>Genesis holders receive lifetime ecosystem benefits.</p></div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap reveal">
+  <h2>Roadmap</h2>
+  <img src="images/lunar_roadmap.png">
+</section>
+
+<!-- NFT COLLECTION -->
+<section class="reveal">
+  <h2>Lunar Collection</h2>
+  <div class="gallery">
+    <img src="images/nft1.png">
+    <img src="images/nft2.png">
+    <img src="images/nft3.png">
+    <img src="images/nft4.png">
+    <img src="images/nft5.png">
+    <img src="images/nft6.png">
+    <img src="images/nft7.png">
+    <img src="images/nft8.png">
+    <img src="images/nft9.png">
+    <img src="images/nft10.png">
+    <img src="images/nft11.png">
+    <img src="images/nft12.png">
+    <img src="images/nft13.png">
+    <img src="images/nft14.png">
+    <img src="images/nft15.png">
+    <img src="images/nft16.png">
+    <img src="images/nft17.png">
+    <img src="images/nft18.png">
+    <img src="images/nft19.png">
+    <img src="images/nft20.png">
+  </div>
+</section>
+
+<!-- WHITEPAPER -->
+<section class="reveal">
+  <h2>LUNAR HOWL WHITEPAPER</h2>
+  <div class="whitepaper">
+    <p><b>“From Mortals to Immortals — the rise of divine creation.”</b></p>
+    <p><b>Built on Solana</b></p>
+
+    <h3>INTRODUCTION</h3>
+    <p>In the light of Solana, Divinity awakens. From the code of creation,
+      a new order rises — Lunar Howl. These are not mere NFTs; they are
+      fragments of eternity forged in lunar energy.
+    </p>
+    <p>Each Lunar Howl NFT is a digital immortal carrying sacred energy
+      within the ecosystem.
+    </p>
+    <p>The Pack rises. The Pack reigns. The Pack howls.</p>
+
+    <h3>PROJECT OVERVIEW</h3>
+    <ul>
+      <li>Supply: 1111</li>
+      <li>Blockchain: Solana</li>
+      <li>Mint Price: TBA</li>
+      <li>Mint Date: TBA</li>
+    </ul>
+
+    <h3>LUNAR HOWL ECOSYSTEM</h3>
+    <ul>
+      <li>Lunar Vault — staking rewards</li>
+      <li>Lunar Gate — launchpad access</li>
+      <li>$HOWL governance token</li>
+      <li>Lunar Realms 3D gaming universe</li>
+    </ul>
+
+    <h3>ECONOMIC MODEL</h3>
+    <ul>
+      <li>40% Staking & Play-to-Earn</li>
+      <li>25% Ecosystem development</li>
+      <li>20% Team</li>
+      <li>10% Community</li>
+      <li>5% Treasury</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© Lunar Howl</p>
+  <div class="socials">
+    <a href="https://discord.gg/72gAHHpPY8">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
+    </a>
+    <a href="https://x.com/lunar__howl">
+      <img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png">
+    </a>
+  </div>
+</footer>
+
+<script>
+/* ----------------- PRELOADER ----------------- */
+window.addEventListener("load",function(){
+  setTimeout(function(){
+    document.getElementById("preloader").style.opacity="0";
+    setTimeout(()=>{
+      document.getElementById("preloader").style.display="none";
+    },1000);
+  },2200);
+})
+
+/* ----------------- SCROLL REVEAL ----------------- */
+function reveal(){
+  let reveals=document.querySelectorAll(".reveal");
+  for(let i=0;i<reveals.length;i++){
+    let windowHeight=window.innerHeight;
+    let revealTop=reveals[i].getBoundingClientRect().top;
+    let revealPoint=100;
+    if(revealTop < windowHeight - revealPoint){
+      reveals[i].classList.add("active");
+    }
+  }
+}
+window.addEventListener("scroll",reveal);
+</script>
+
+</body>
+</html>
