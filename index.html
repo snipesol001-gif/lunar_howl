@@ -146,6 +146,10 @@ body::before{
   opacity:.85;
 }
 
+.hero{
+  margin-top:80px;
+}
+
 .btn{
   margin-top:25px;
   padding:14px 32px;
@@ -297,10 +301,63 @@ footer{
   opacity:1;
   transform:translateY(0);
 }
+
+  /* ----------------- NAVBAR ----------------- */
+.navbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 8%;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(10px);
+  z-index:999;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.nav-logo{
+  font-family:Orbitron;
+  font-size:20px;
+  color:#ffb347;
+  letter-spacing:2px;
+  text-shadow:0 0 10px #ff7b00;
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+  font-size:14px;
+  transition:.3s;
+}
+
+.nav-links a:hover{
+  color:#ffb347;
+  text-shadow:0 0 10px #ff7b00;
+}
 </style>
 </head>
 
 <body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">LUNAR HOWL</div>
+
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#ecosystem">Ecosystem</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#collection">Collection</a>
+    <a href="#whitepaper">Whitepaper</a>
+  </div>
+</nav>
 
 <!-- UNIVERSE PLANETS -->
 <div id="planet1"></div>
@@ -311,7 +368,7 @@ footer{
   <img src="images/hero_nft.png">
   <h1>LUNAR HOWL</h1>
 </div>
-
+  
 <!-- HERO -->
 <section class="hero">
   <img src="images/hero_nft.png">
@@ -323,7 +380,7 @@ footer{
 </section>
 
 <!-- ABOUT -->
-<section class="about reveal">
+<section id="about" class="about reveal">
   <h2>About</h2>
   <p>
     Lunar Howl is a divine NFT ecosystem built on Solana where holders become part of
@@ -333,7 +390,7 @@ footer{
 </section>
 
 <!-- ECOSYSTEM -->
-<section class="reveal">
+<section id="ecosystem" class="reveal">
   <h2>Ecosystem</h2>
   <div class="features">
     <div class="feature"><h3>Lunar Vault</h3><p>Stake your Lunar NFT to earn SOL rewards.</p></div>
@@ -346,13 +403,13 @@ footer{
 </section>
 
 <!-- ROADMAP -->
-<section class="roadmap reveal">
+<section id="roadmap" class="roadmap reveal">
   <h2>Roadmap</h2>
   <img src="https://fv5-5.files.fm/thumb_show.php?i=53qhdq9gc6&view&v=1&PHPSESSID=ce27e31197caf828632e9db2a8e492898216b026" alt="Lunar Roadmap">
 </section>
 
 <!-- NFT COLLECTION -->
-<section class="reveal">
+<section id="collection" class="reveal">
   <h2>Lunar Collection</h2>
   <div class="gallery">
     <img src="images/nft1.png">
@@ -379,7 +436,7 @@ footer{
 </section>
 
 <!-- WHITEPAPER -->
-<section class="reveal">
+<section id="whitepaper" class="reveal">
   <h2>LUNAR HOWL WHITEPAPER</h2>
   <div class="whitepaper">
     <p><b>“From Mortals to Immortals — the rise of divine creation.”</b></p>
