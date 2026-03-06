@@ -341,6 +341,111 @@ footer{
   color:#ffb347;
   text-shadow:0 0 10px #ff7b00;
 }
+
+/* ----------------- NAVBAR ----------------- */
+.navbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 8%;
+  background:rgba(0,0,0,0.3);
+  backdrop-filter:blur(12px);
+  z-index:999;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  transition:background .3s ease, backdrop-filter .3s ease, box-shadow .3s ease;
+}
+
+/* navbar on scroll */
+.navbar.scrolled{
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(16px);
+  box-shadow:0 0 25px rgba(255,140,0,.3);
+}
+
+.nav-logo{
+  font-family:Orbitron;
+  font-size:20px;
+  color:#ffb347;
+  letter-spacing:2px;
+  text-shadow:0 0 10px #ff7b00;
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+  font-size:14px;
+  position:relative;
+  transition:.3s;
+}
+
+/* glowing hover underline */
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:-3px;
+  width:0;
+  height:2px;
+  background:#ffb347;
+  box-shadow:0 0 10px #ff7b00;
+  transition:.3s;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+.nav-links a.active{
+  color:#ffb347;
+}
+
+/* Hamburger */
+.hamburger{
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+  gap:5px;
+}
+
+.hamburger span{
+  width:25px;
+  height:3px;
+  background:white;
+  border-radius:2px;
+  transition:.3s;
+}
+
+/* Mobile view */
+@media(max-width:768px){
+  .nav-links{
+    position:fixed;
+    top:70px;
+    right:-100%;
+    flex-direction:column;
+    background:rgba(0,0,0,0.9);
+    width:200px;
+    padding:20px;
+    gap:15px;
+    transition:.3s;
+    border-left:1px solid rgba(255,255,255,.1);
+  }
+
+  .nav-links.show{
+    right:0;
+  }
+
+  .hamburger{
+    display:flex;
+  }
+}
+  
 </style>
 </head>
 
@@ -350,12 +455,19 @@ footer{
 <nav class="navbar">
   <div class="nav-logo">LUNAR HOWL</div>
 
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="#about">About</a>
     <a href="#ecosystem">Ecosystem</a>
     <a href="#roadmap">Roadmap</a>
     <a href="#collection">Collection</a>
     <a href="#whitepaper">Whitepaper</a>
+  </div>
+
+  <!-- Hamburger for mobile -->
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </nav>
 
@@ -516,6 +628,45 @@ function reveal(){
   }
 }
 window.addEventListener("scroll",reveal);
+
+  // Navbar scroll effect
+const navbar = document.querySelector(".navbar");
+window.addEventListener("scroll", ()=>{
+  if(window.scrollY > 50){
+    navbar.classList.add("scrolled");
+  }else{
+    navbar.classList.remove("scrolled");
+  }
+});
+
+// Hamburger toggle
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("navLinks");
+hamburger.addEventListener("click", ()=>{
+  navLinks.classList.toggle("show");
+});
+
+// Active link highlighting
+const sections = document.querySelectorAll("section[id]");
+const navItems = document.querySelectorAll(".nav-links a");
+
+function highlightMenu(){
+  let scrollY = window.pageYOffset;
+  sections.forEach(sec=>{
+    const sectionHeight = sec.offsetHeight;
+    const sectionTop = sec.offsetTop - 80; // offset for navbar
+    const sectionId = sec.getAttribute("id");
+    if(scrollY >= sectionTop && scrollY < sectionTop + sectionHeight){
+      navItems.forEach(link=>{
+        link.classList.remove("active");
+        if(link.getAttribute("href") === `#${sectionId}`){
+          link.classList.add("active");
+        }
+      });
+    }
+  });
+}
+window.addEventListener("scroll", highlightMenu);
 </script>
 
 </body>
